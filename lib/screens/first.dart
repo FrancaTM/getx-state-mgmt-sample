@@ -28,19 +28,13 @@ class First extends StatelessWidget {
             ),
             Obx(() {
               return Text(
-                  "Stored count: ${Get
-                      .find<UserController>()
-                      .user
-                      .value
-                      .count}");
+                  "Stored count: ${Get.find<UserController>().user.value.count}");
             }),
             RaisedButton(
               child: Text("Update name & stored count"),
               onPressed: () {
                 Get.find<UserController>()
-                    .updateUser(Get
-                    .find<CountController>()
-                    .count);
+                    .updateUser(Get.find<CountController>().count);
               },
             ),
             SizedBox(
