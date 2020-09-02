@@ -4,8 +4,6 @@ import 'package:getx_state_mgmt_sample/controllers/countController.dart';
 import 'package:getx_state_mgmt_sample/screens/second.dart';
 
 class First extends StatelessWidget {
-  final CountController countController = Get.put(CountController());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,9 +14,11 @@ class First extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            GetBuilder<CountController>(builder: (_) {
-              return Text("Current count value: ${_.count}");
-            }),
+            GetBuilder<CountController>(
+                init: CountController(),
+                builder: (_) {
+                  return Text("Current count value: ${_.count}");
+                }),
             RaisedButton(
               child: Text("Update name & stored count"),
               onPressed: () {},
@@ -38,7 +38,7 @@ class First extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
-            countController.increment();
+            Get.find<CountController>().increment();
           }),
     );
   }
