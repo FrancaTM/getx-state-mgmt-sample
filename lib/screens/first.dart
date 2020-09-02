@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_state_mgmt_sample/controllers/countController.dart';
+import 'package:getx_state_mgmt_sample/controllers/userController.dart';
 import 'package:getx_state_mgmt_sample/screens/second.dart';
 
 class First extends StatelessWidget {
@@ -19,9 +20,28 @@ class First extends StatelessWidget {
                 builder: (_) {
                   return Text("Current count value: ${_.count}");
                 }),
+            GetX<UserController>(
+              init: UserController(),
+              builder: (_) {
+                return Text("Name: ${_.user.value.name}");
+              },
+            ),
+            Obx(() {
+              return Text(
+                  "Stored count: ${Get
+                      .find<UserController>()
+                      .user
+                      .value
+                      .count}");
+            }),
             RaisedButton(
               child: Text("Update name & stored count"),
-              onPressed: () {},
+              onPressed: () {
+                Get.find<UserController>()
+                    .updateUser(Get
+                    .find<CountController>()
+                    .count);
+              },
             ),
             SizedBox(
               height: 100,
